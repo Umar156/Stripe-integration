@@ -34,13 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_131351) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "names", force: :cascade do |t|
-    t.string "email"
-    t.string "stripe_customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "workshops", force: :cascade do |t|
     t.string "name"
     t.text "description"

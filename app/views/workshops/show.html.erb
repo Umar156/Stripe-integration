@@ -18,3 +18,37 @@
     </div>
   </div>
 </div>
+<div class="col-lg-4 mt-5">
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <h4 class="card-title mb-2">Reserve your seat now! </h4>
+      <%= form_with url: root_path do |f| %>
+        <%= f.hidden_field :workshop_id, value: @workshop.id%>
+        <div class="form-group">
+          <%= f.label :name, class: "my-2" %>
+          <%= f.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, class: "my-2" %>
+          <%= f.text_field :email, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :no_of_seats, class: "my-2" %>
+          <%= f.number_field :no_of_tickets, class: "form-control", required: true, min:1, max: @workshop.remaining_seats %>
+        </div>
+        <h4 class="my-4">Card Details</h4>
+        <hr>
+        <%= f.hidden_field :stripeToken %>
+        <div id="card-element"></div>
+        <div id="card-errors" role="alert"></div>
+        <div class="d-grid gap-2">
+          <%= f.submit "Book Now", class: "btn btn-outline-danger btn-lg mt-3" %>
+        </div>
+        <script type="text/javascript">
+          var stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
+        </script>
+        <%= javascript_include_tag 'stripe'%>
+      <% end %>
+    </div>
+  </div>
+</div>
