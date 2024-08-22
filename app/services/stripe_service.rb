@@ -16,16 +16,16 @@ class StripeService
   end
 
   def create_source(stripe_customer, token)
-    source = Stripe::Customer.create_source(stripe_customer, {source: 'tok_visa'})
+    source = Stripe::Customer.create_source(stripe_customer, {source: token})
   end
 
-  def create_charge(amount_paid, customer_id, card_id, workshop_name){
+  def create_charge(amount_paid, customer_id, card, workshop_name)
     Stripe::Charge.create({
         amount: (amount_paid * 100).to_i,
         currency: 'usd',
         customer: customer_id,
-        source: card_id,
+        source: card,
         description: "Amount #{amount_paid} charged for #{workshop_name}"
     })
-  }
+  end
 end
