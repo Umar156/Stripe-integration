@@ -1,0 +1,13 @@
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333;">
+  <p><strong>Hi Admin,</strong></p>
+  <div class="container" style="width: 100%; max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border: 1px solid #dddddd; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div class="header" style="background-color: #71cd14; padding: 20px; text-align: center; color: #ffffff;">
+      <h1 style="margin: 0; font-size: 24px;">Booking Confirmation</h1>
+    </div>
+    <div class="content" style="padding: 20px; line-height: 1.6;">
+      <h2 style="color: #797979; font-size: 20px; margin-bottom: 20px;">Booking Details</h2>
+      <p><strong>Tickets:</strong> <%= @booking.no_of_tickets %></p>
+      <p><strong>Amount:</strong> <%= @booking.amount_paid %></p>
+    </div>
+  </div>
+</body>

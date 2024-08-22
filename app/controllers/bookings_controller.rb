@@ -13,9 +13,10 @@ class BookingsController < ApplicationController
     @charge = @stripe_service.create_charge(@amount_paid, @stripe_customer.id, @card.id, @workshop.name)
     @booking = @workshop.bookings.new(no_of_tickets: params[:no_of_tickets], amount_paid: @amount_paid, stripe_transaction_id: @charge.id, customer_id: @customer.id)
     @booking.save!
-    redirect_to workshop_path(@workshop), alert: 'Your ticket has been booked!'
+    BookingMailer.notify_owner(@booking).deliver_now
+    redirect_to workshop_path(@workshop), notice: 'Your ticket has been booked!'
   rescue Stripe::StripeError => e
-    redirect_to workshop_path(@workshop), alert: "#{e.message}"
+    redirect_to workshop_path(@workshop), notice: "#{e.message}"
   end
 
   private
