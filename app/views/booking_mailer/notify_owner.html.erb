@@ -8,6 +8,9 @@
       <h2 style="color: #797979; font-size: 20px; margin-bottom: 20px;">Booking Details</h2>
       <p><strong>Tickets:</strong> <%= @booking.no_of_tickets %></p>
       <p><strong>Amount:</strong> <%= @booking.amount_paid %></p>
+      <div style="width: 100px; height: 100px;">
+        <%= @svg.html_safe %>
+      </div>
     </div>
   </div>
 </body>

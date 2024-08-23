@@ -22,7 +22,7 @@
   <div class="card shadow mb-3">
     <div class="card-body">
       <h4 class="card-title mb-2">Reserve your seat now! </h4>
-      <%= form_with url: bookings_create_path do |f| %>
+      <%= form_with url: bookings_path do |f| %>
         <%= f.hidden_field :workshop_id, value: @workshop.id%>
         <div class="form-group">
           <%= f.label :name, class: "my-2" %>

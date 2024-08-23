@@ -19,6 +19,10 @@ class BookingsController < ApplicationController
     redirect_to workshop_path(@workshop), notice: "#{e.message}"
   end
 
+  def booking_details   # for QR Code
+    @booking = Booking.find_by(id: params[:id])
+  end
+
   private
 
   def customer_params
