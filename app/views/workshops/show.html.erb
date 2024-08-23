@@ -1,0 +1,54 @@
+<div class="col-lg-8 mt-5">
+  <div class="card shadow mb-3 mt-2">
+    <div class="card-body">
+      <h4 class="card-title"><%= @workshop.name %></h4>
+      <div class="row mt-3">
+        <div class="col-md-7">
+          <h4><span class="badge bg-primary">From <%= @workshop.start_date %>to <%= @workshop.end_date %></span></h4>
+          <h4><span class="badge bg-primary">Everyday from <%= @workshop.start_time %>to <%= @workshop.end_time %></span></h4>
+        </div>
+        <div class="col-md-5">
+          <h4>Total Seats:<span class="badge bg-primary"><%= @workshop.total_seats %></span></h4>
+          <h4>Remaining Seats:<span class="badge bg-primary"><%= @workshop.remaining_seats %></span></h4>
+          <h4>Registration Fee:<span class="badge bg-primary"><%= @workshop.registration_fee %></span></h4>
+        </div>
+      </div>
+      <p class="lead mt-3 mb-3"><%= @workshop.description %></p>
+      <%= link_to "Back to Workshops", workshops_path, class: "btn btn-outline-danger btn-lg mt-3" %>
+    </div>
+  </div>
+</div>
+<div class="col-lg-4 mt-5">
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <h4 class="card-title mb-2">Reserve your seat now! </h4>
+      <%= form_with url: bookings_path do |f| %>
+        <%= f.hidden_field :workshop_id, value: @workshop.id%>
+        <div class="form-group">
+          <%= f.label :name, class: "my-2" %>
+          <%= f.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, class: "my-2" %>
+          <%= f.text_field :email, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :no_of_seats, class: "my-2" %>
+          <%= f.number_field :no_of_tickets, class: "form-control", required: true, min:1, max: @workshop.remaining_seats %>
+        </div>
+        <h4 class="my-4">Card Details</h4>
+        <hr>
+        <%= f.hidden_field :stripeToken %>
+        <div id="card-element"></div>
+        <div id="card-errors" role="alert"></div>
+        <div class="d-grid gap-2">
+          <%= f.submit "Book Now", class: "btn btn-outline-danger btn-lg mt-3" %>
+        </div>
+        <script type="text/javascript">
+          var stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
+        </script>
+        <%= javascript_include_tag 'stripe'%>
+      <% end %>
+    </div>
+  </div>
+</div>

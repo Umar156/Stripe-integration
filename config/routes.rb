@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'home#index'
+  resources :workshops, only: %i[index show]
+  resources :bookings, only: %i[create] do 
+    get :booking_details, on: :member   # for QR code
+  end
 end
