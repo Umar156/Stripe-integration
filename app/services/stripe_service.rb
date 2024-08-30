@@ -28,4 +28,13 @@ class StripeService
         description: "Amount #{amount_paid} charged for #{workshop_name}"
     })
   end
+
+
+  # for monthly or yearly subscription
+  def create_subscription(stripe_customer_id, plan_id)
+    Stripe::Subscription.create({
+      customer: stripe_customer_id,
+      items: [{ plan: plan_id }]
+    })
+  end
 end

@@ -36,6 +36,13 @@
           <%= f.label :no_of_seats, class: "my-2" %>
           <%= f.number_field :no_of_tickets, class: "form-control", required: true, min:1, max: @workshop.remaining_seats %>
         </div>
+
+        <div class="form-group">
+          <%= f.label :subscription_plan, "Select Plan", class: "my-2" %>
+          <%= f.select :subscription_plan, options_for_select([["Monthly", "price_1PtQDEECeETrGPHpngadXfRx"], ["Yearly", "price_1PtRF9ECeETrGPHpN7lDGmjA"]]), { include_blank: "No Subscription" }, class: "form-control" %>
+        </div>
+
+
         <h4 class="my-4">Card Details</h4>
         <hr>
         <%= f.hidden_field :stripeToken %>
